@@ -1,93 +1,182 @@
-# h4d-template
+# Has4Defence – Repozytorium Zespołu
 
+Witamy w oficjalnym repozytorium zespołu biorącego udział w hackathonie **Has4Defence**.  
+To repozytorium służy jako główne miejsce przechowywania **całego kodu, dokumentacji oraz zasobów** związanych z projektem realizowanym podczas wydarzenia.
 
+---
 
-## Getting started
+## 1. Informacje ogólne o repozytorium
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+- Każdy zespół posiada **dedykowane repozytorium** oraz **indywidualny Access Token**.
+- Access Token służy do wykonywania operacji `push`, `pull` oraz zarządzania kodem.
+- Tokeny są ważne **do godziny 06:00**, kiedy zostaną automatycznie wycofane.
+- Cała praca projektowa powinna być przechowywana wyłącznie w tym repozytorium.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+---
 
-## Add your files
+## 2. Struktura pracy i zasady dotyczące branchy
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+- Głównym branchem jest **master**.
+- Tylko kod znajdujący się w branchu **master** będzie oceniany przez organizatorów.
+- Możesz tworzyć dodatkowe branche (np. `feature/...`, `fix/...`, `dev`), ale:
+  - wszystkie finalne zmiany muszą znaleźć się w **master** przed godziną 06:00,
+  - rekomendowane jest używanie merge requestów lub merge bezpośredni, zgodnie z ustaleniami w zespole.
 
-```
-cd existing_repo
-git remote add origin https://orkan.tu.kielce.pl/gitlab/hack4defence-2025/project-templates/h4d-template.git
-git branch -M master
-git push -uf origin master
-```
+---
 
-## Integrate with your tools
+## 3. Częstotliwość commitów i aktywność repozytorium
 
-- [ ] [Set up project integrations](https://orkan.tu.kielce.pl/gitlab/hack4defence-2025/project-templates/h4d-template/-/settings/integrations)
+Aby umożliwić organizatorom monitorowanie postępów:
 
-## Collaborate with your team
+- Zespół powinien wykonywać **co najmniej jeden push na godzinę**.
+- Rekomendacja: wykonywać push **o pełnej godzinie** (np. 19:00, 20:00, 21:00...).
+- Regularne commitowanie i pushowanie:
+  - redukuje ryzyko utraty pracy,
+  - ułatwia śledzenie progresu,
+  - pomaga w rozwiązywaniu konfliktów.
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+---
 
-## Test and Deploy
+## 4. Technologie i narzędzia
 
-Use the built-in continuous integration in GitLab.
+- Dozwolone są **dowolne technologie, języki programowania, frameworki oraz narzędzia**.
+- Można używać zarówno narzędzi open source jak i komercyjnych.
+- Wybór technologii należy całkowicie do zespołu.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+---
 
-***
+## 5. Ramy czasowe Hackathonu
 
-# Editing this README
+- Start wydarzenia: **18:00**.
+- Zakończenie: **06:00 (następnego dnia)**.
+- O godzinie **06:00 wszystkie Access Tokeny zostaną wycofane**.
+- Cała praca musi znajdować się na branchu **master** przed tą godziną.
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+---
 
-## Suggestions for a good README
+## 6. Dobre praktyki – zalecenia techniczne i organizacyjne
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+### Praktyki dotyczące kodu
+- Pisz kod zgodnie z przyjętymi standardami (PEP8, PSR-12, Google Style Guide, itp.).
+- Używaj czytelnych nazw zmiennych, funkcji oraz modułów.
+- Komentuj złożone fragmenty kodu.
+- Dziel projekt na logiczne komponenty — unikaj umieszczania wszystkiego w jednym pliku.
 
-## Name
-Choose a self-explaining name for your project.
+### Praktyki dotyczące repozytorium
+- Twórz czytelne komunikaty commitów (np. „Add authentication module”, „Fix API bug”).
+- Korzystaj z `.gitignore`, by nie umieszczać w repo plików tymczasowych, bibliotek, logów itp.
+- Jeśli projekt wymaga instalacji lub konfiguracji – dodaj instrukcję uruchomienia (np. plik `INSTALL.md` lub sekcja w README).
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+### Praca zespołowa
+- Ustal role (backend, frontend, integracja, dokumentacja).
+- Komunikuj problemy na bieżąco — hackathon to szybki sprint.
+- Ustal wewnętrzny workflow Git (np. dev → master, feature branches).
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+### Dobre praktyki techniczne
+- Waliduj dane wejściowe.
+- Obsługuj błędy i nie zakładaj idealnych warunków.
+- Jeżeli tworzycie API — przygotujcie chociaż podstawową dokumentację (np. OpenAPI / Swagger w formie YAML/JSON lub opis w markdown).
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+---
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+## 7. Kontakt z organizatorami
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+W razie problemów technicznych (repozytoria, dostęp, tokeny), prosimy o kontakt poprzez oficjalne kanały komunikacyjne hackathonu **Has4Defence**.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+---
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+**Powodzenia i dobrej zabawy! 🚀**  
+Niech wygra najlepszy projekt!
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+## English version
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+# Has4Defence – Team Repository
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+Welcome to the official repository for your team participating in the **Has4Defence Hackathon**.  
+This repository serves as the main storage for **all code, documentation, and project resources** created during the event.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+---
 
-## License
-For open source projects, say how it is licensed.
+## 1. General Repository Information
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+- Each team receives a **dedicated repository** and an **individual Access Token**.
+- Use your Access Token to perform `push`, `pull`, and manage the code within this repository.
+- All Access Tokens are valid **until 06:00**, at which point they will be automatically revoked.
+- All project work, results, and final code must be stored exclusively in this repository.
+
+---
+
+## 2. Branch Structure and Rules
+
+- The main branch for evaluation is **master**.
+- Only the content located in the **master** branch will be assessed by the organizers.
+- You may create additional branches (e.g., `feature/...`, `fix/...`, `dev`), but:
+  - all final changes must be merged into **master** before 06:00,
+  - use merge requests or direct merges, depending on the team's workflow.
+
+---
+
+## 3. Commit Frequency and Repository Activity
+
+To allow organizers to monitor progress:
+
+- Each team must perform **at least one push per hour**.
+- Recommended practice: push **at the full hour** (e.g., 19:00, 20:00, 21:00...).
+- Regular commits and pushes:
+  - reduce the risk of losing work,
+  - help track progress,
+  - simplify conflict resolution.
+
+---
+
+## 4. Technologies and Tools
+
+- You are free to use **any technology, programming language, framework, or tool**.
+- Both open-source and commercial tools are allowed, as long as licensing conditions are respected.
+- Technology choice is entirely up to your team.
+
+---
+
+## 5. Hackathon Timeline
+
+- Hackathon start: **18:00**  
+- Hackathon end: **06:00 (next day)**  
+- At **06:00**, all Access Tokens will be revoked.
+- All final work must be present in the **master** branch before 06:00.
+
+---
+
+## 6. Best Practices – Technical and Organizational Guidelines
+
+### Code Quality Practices
+- Follow language-specific style guides (PEP8, PSR-12, Google Style Guide, etc.).
+- Use meaningful and readable names for variables, functions, classes, and files.
+- Comment complex or non-obvious parts of the code.
+- Split your project into logical modules — avoid placing everything in a single file.
+
+### Repository Practices
+- Write clear and concise commit messages (e.g., “Add authentication module”, “Fix API error”).
+- Use `.gitignore` to exclude unnecessary files such as temporary data, logs, binaries, or dependencies.
+- If your project requires installation or configuration steps, add an `INSTALL.md` file or an “Installation / Run Guide” section in this README.
+
+### Teamwork Practices
+- Assign roles within the team (backend, frontend, integration, documentation, etc.).
+- Communicate actively — a hackathon is a sprint.
+- Define an internal Git workflow (e.g., dev → master, feature branches).
+
+### Technical Good Practices
+- Validate all input data.
+- Handle errors and unexpected cases gracefully.
+- If building an API, provide minimal documentation (OpenAPI/Swagger YAML/JSON or a markdown description).
+- Consider adding basic logging if relevant to your project.
+
+---
+
+## 7. Contact with Organizers
+
+If you encounter technical issues (repository access, token problems, etc.), please contact the organizers through the official Has4Defence communication channels.
+
+---
+
+**Good luck and have fun! 🚀**  
+May the best project win!
