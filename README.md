@@ -1,6 +1,6 @@
-# Has4Defence – Repozytorium Zespołu
+# Hack4Defence – Repozytorium Zespołu
 
-Witamy w oficjalnym repozytorium zespołu biorącego udział w hackathonie **Has4Defence**.  
+Witamy w oficjalnym repozytorium zespołu biorącego udział w hackathonie **Hack4Defence**.  
 To repozytorium służy jako główne miejsce przechowywania **całego kodu, dokumentacji oraz zasobów** związanych z projektem realizowanym podczas wydarzenia.
 
 ---
@@ -81,7 +81,7 @@ Aby umożliwić organizatorom monitorowanie postępów:
 
 ## 7. Kontakt z organizatorami
 
-W razie problemów technicznych (repozytoria, dostęp, tokeny), prosimy o kontakt poprzez oficjalne kanały komunikacyjne hackathonu **Has4Defence**.
+W razie problemów technicznych (repozytoria, dostęp, tokeny), prosimy o kontakt poprzez oficjalne kanały komunikacyjne hackathonu **Hack4Defence**.
 
 ---
 
@@ -90,9 +90,9 @@ Niech wygra najlepszy projekt!
 
 ## English version
 
-# Has4Defence – Team Repository
+# Hack4Defence – Team Repository
 
-Welcome to the official repository for your team participating in the **Has4Defence Hackathon**.  
+Welcome to the official repository for your team participating in the **Hack4Defence Hackathon**.  
 This repository serves as the main storage for **all code, documentation, and project resources** created during the event.
 
 ---
@@ -174,7 +174,7 @@ To allow organizers to monitor progress:
 
 ## 7. Contact with Organizers
 
-If you encounter technical issues (repository access, token problems, etc.), please contact the organizers through the official Has4Defence communication channels.
+If you encounter technical issues (repository access, token problems, etc.), please contact the organizers through the official Hack4Defence communication channels.
 
 ---
 
