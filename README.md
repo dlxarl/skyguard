@@ -1,4 +1,4 @@
-🇵🇱 **Polish Version**
+🇵🇱 **Polska Wersja**
 
 # Hack4Defence – Repozytorium Zespołu
 
@@ -110,6 +110,8 @@ W przypadku problemów technicznych (repozytoria, dostęp, tokeny), prosimy o ko
 
 **Powodzenia i świetnej zabawy! 🚀**  
 Niech wygra najlepszy projekt!
+
+---
 
 🇬🇧 **English Version**
 
