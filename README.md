@@ -1,3 +1,5 @@
+🇵🇱 **Polish Version**
+
 # Hack4Defence – Repozytorium Zespołu
 
 Witamy w oficjalnym repozytorium zespołu biorącego udział w hackathonie **Hack4Defence**.  
@@ -109,7 +111,7 @@ W przypadku problemów technicznych (repozytoria, dostęp, tokeny), prosimy o ko
 **Powodzenia i świetnej zabawy! 🚀**  
 Niech wygra najlepszy projekt!
 
-## English version
+🇬🇧 **English Version**
 
 # Hack4Defence – Team Repository
 
