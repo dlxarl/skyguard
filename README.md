@@ -1,26 +1,26 @@
 # Hack4Defence – Repozytorium Zespołu
 
 Witamy w oficjalnym repozytorium zespołu biorącego udział w hackathonie **Hack4Defence**.  
-To repozytorium służy jako główne miejsce przechowywania **całego kodu, dokumentacji oraz zasobów** związanych z projektem realizowanym podczas wydarzenia.
+To repozytorium służy jako główne miejsce przechowywania **całego kodu, dokumentacji oraz zasobów** tworzonych podczas wydarzenia.
 
 ---
 
 ## 1. Informacje ogólne o repozytorium
 
 - Każdy zespół posiada **dedykowane repozytorium** oraz **indywidualny Access Token**.
-- Access Token służy do wykonywania operacji `push`, `pull` oraz zarządzania kodem.
+- Access Token służy do wykonywania operacji `push`, `pull` i zarządzania kodem.
 - Tokeny są ważne **do godziny 06:00**, kiedy zostaną automatycznie wycofane.
-- Cała praca projektowa powinna być przechowywana wyłącznie w tym repozytorium.
+- Wszelkie prace projektowe muszą być przechowywane w tym repozytorium.
 
 ---
 
 ## 2. Struktura pracy i zasady dotyczące branchy
 
-- Głównym branchem jest **master**.
-- Tylko kod znajdujący się w branchu **master** będzie oceniany przez organizatorów.
-- Możesz tworzyć dodatkowe branche (np. `feature/...`, `fix/...`, `dev`), ale:
-  - wszystkie finalne zmiany muszą znaleźć się w **master** przed godziną 06:00,
-  - rekomendowane jest używanie merge requestów lub merge bezpośredni, zgodnie z ustaleniami w zespole.
+- Głównym, ocenianym branchem jest **master**.
+- Tylko zawartość znajdująca się na branchu **master** będzie brana pod uwagę podczas oceny.
+- Można tworzyć dodatkowe branche (np. `feature/...`, `fix/...`, `dev`), jednak:
+  - wszystkie finalne zmiany muszą zostać zmergowane do **master** przed 06:00,
+  - merge requesty lub merge bezpośredni zależą od wewnętrznych ustaleń zespołu.
 
 ---
 
@@ -28,64 +28,85 @@ To repozytorium służy jako główne miejsce przechowywania **całego kodu, dok
 
 Aby umożliwić organizatorom monitorowanie postępów:
 
-- Zespół powinien wykonywać **co najmniej jeden push na godzinę**.
-- Rekomendacja: wykonywać push **o pełnej godzinie** (np. 19:00, 20:00, 21:00...).
-- Regularne commitowanie i pushowanie:
-  - redukuje ryzyko utraty pracy,
-  - ułatwia śledzenie progresu,
-  - pomaga w rozwiązywaniu konfliktów.
+- Każdy zespół musi wykonywać **co najmniej jeden push co 2 godziny**.
+- Zalecenie: push **o pełnych parzystych godzinach** (np. 20:00, 22:00, 00:00, 02:00...).
+- Regularne pushowanie:
+  - minimalizuje ryzyko utraty pracy,
+  - dokumentuje postępy zespołu,
+  - ułatwia rozwiązywanie konfliktów merge.
 
 ---
 
 ## 4. Technologie i narzędzia
 
-- Dozwolone są **dowolne technologie, języki programowania, frameworki oraz narzędzia**.
-- Można używać zarówno narzędzi open source jak i komercyjnych.
-- Wybór technologii należy całkowicie do zespołu.
+- Uczestnicy mogą korzystać z **dowolnych technologii, języków programowania, frameworków i narzędzi**.
+- Dozwolone są rozwiązania open source oraz komercyjne (zgodnie z licencją).
+- Wybór technologii pozostaje całkowicie w gestii zespołu.
 
 ---
 
 ## 5. Ramy czasowe Hackathonu
 
-- Start wydarzenia: **18:00**.
-- Zakończenie: **06:00 (następnego dnia)**.
+- Start wydarzenia: **18:00**
+- Koniec wydarzenia: **06:00 (następnego dnia)**
 - O godzinie **06:00 wszystkie Access Tokeny zostaną wycofane**.
-- Cała praca musi znajdować się na branchu **master** przed tą godziną.
+- Cała praca musi być umieszczona na branchu **master** przed godziną 06:00.
 
 ---
 
-## 6. Dobre praktyki – zalecenia techniczne i organizacyjne
+## 6. Zakaz używania narzędzi AI
 
-### Praktyki dotyczące kodu
-- Pisz kod zgodnie z przyjętymi standardami (PEP8, PSR-12, Google Style Guide, itp.).
-- Używaj czytelnych nazw zmiennych, funkcji oraz modułów.
-- Komentuj złożone fragmenty kodu.
-- Dziel projekt na logiczne komponenty — unikaj umieszczania wszystkiego w jednym pliku.
+Aby zapewnić uczciwą rywalizację oraz realizację idei hackathonu:
 
-### Praktyki dotyczące repozytorium
-- Twórz czytelne komunikaty commitów (np. „Add authentication module”, „Fix API bug”).
-- Korzystaj z `.gitignore`, by nie umieszczać w repo plików tymczasowych, bibliotek, logów itp.
-- Jeśli projekt wymaga instalacji lub konfiguracji – dodaj instrukcję uruchomienia (np. plik `INSTALL.md` lub sekcja w README).
+### **Bezwzględnie zabrania się korzystania z jakichkolwiek narzędzi opartych o AI**, w tym w szczególności:
+- ChatGPT (wszystkie wersje)
+- GitHub Copilot
+- Perplexity
+- Codeium
+- Tabnine
+- Google Gemini / Bard
+- Jakiekolwiek inne narzędzia generujące kod lub tekst
+- Botów i asystentów AI w IDE lub przeglądarce
+
+Zespoły muszą polegać wyłącznie na **własnej wiedzy, umiejętnościach i manualnym tworzeniu kodu**.
+
+Naruszenie tego zakazu może skutkować **karami lub dyskwalifikacją**.
+
+---
+
+## 7. Dobre praktyki – zalecenia techniczne i organizacyjne
+
+### Jakość kodu
+- Stosuj standardy kodowania odpowiednie dla wybranego języka (PEP8, PSR-12, Google Style Guide itd.).
+- Używaj czytelnych i znaczących nazw zmiennych, funkcji, klas i plików.
+- Komentuj złożoną logikę.
+- Dziel projekt na moduły, unikaj jednego monolitycznego pliku.
+
+### Dobre praktyki dla repozytorium
+- Twórz przejrzyste komunikaty commitów (np. „Dodano moduł logowania”, „Naprawiono błąd uwierzytelniania API”).
+- Wykorzystuj `.gitignore`, aby nie umieszczać w repo plików tymczasowych, logów, artefaktów buildów itp.
+- Jeśli projekt wymaga instalacji lub konfiguracji, dodaj instrukcję uruchamiania (README lub `INSTALL.md`).
 
 ### Praca zespołowa
-- Ustal role (backend, frontend, integracja, dokumentacja).
-- Komunikuj problemy na bieżąco — hackathon to szybki sprint.
-- Ustal wewnętrzny workflow Git (np. dev → master, feature branches).
+- Podziel role wewnątrz zespołu (backend, frontend, testy, dokumentacja itp.).
+- Komunikuj problemy na bieżąco — hackathon to szybkie środowisko pracy.
+- Ustal workflow Gita (np. dev → master, feature branches).
 
 ### Dobre praktyki techniczne
 - Waliduj dane wejściowe.
-- Obsługuj błędy i nie zakładaj idealnych warunków.
-- Jeżeli tworzycie API — przygotujcie chociaż podstawową dokumentację (np. OpenAPI / Swagger w formie YAML/JSON lub opis w markdown).
+- Obsługuj błędy i sytuacje wyjątkowe.
+- Jeśli tworzycie API — dodajcie chociaż podstawową dokumentację (OpenAPI/Swagger lub opis w Markdown).
+- Rozważcie dodanie logowania, jeśli ma to znaczenie dla projektu.
 
 ---
 
-## 7. Kontakt z organizatorami
+## 8. Kontakt z organizatorami
 
-W razie problemów technicznych (repozytoria, dostęp, tokeny), prosimy o kontakt poprzez oficjalne kanały komunikacyjne hackathonu **Hack4Defence**.
+W przypadku problemów technicznych (repozytoria, dostęp, tokeny), prosimy o kontakt poprzez oficjalne kanały komunikacyjne hackathonu **Hack4Defence**.
 
 ---
 
-**Powodzenia i dobrej zabawy! 🚀**  
+**Powodzenia i świetnej zabawy! 🚀**  
 Niech wygra najlepszy projekt!
 
 ## English version
@@ -100,8 +121,8 @@ This repository serves as the main storage for **all code, documentation, and pr
 ## 1. General Repository Information
 
 - Each team receives a **dedicated repository** and an **individual Access Token**.
-- Use your Access Token to perform `push`, `pull`, and manage the code within this repository.
-- All Access Tokens are valid **until 06:00**, at which point they will be automatically revoked.
+- Use your Access Token to perform `push`, `pull`, and manage your code.
+- All Access Tokens are valid **until 06:00**, when they will be automatically revoked.
 - All project work, results, and final code must be stored exclusively in this repository.
 
 ---
@@ -112,69 +133,89 @@ This repository serves as the main storage for **all code, documentation, and pr
 - Only the content located in the **master** branch will be assessed by the organizers.
 - You may create additional branches (e.g., `feature/...`, `fix/...`, `dev`), but:
   - all final changes must be merged into **master** before 06:00,
-  - use merge requests or direct merges, depending on the team's workflow.
+  - use merge requests or direct merges depending on team workflow.
 
 ---
 
 ## 3. Commit Frequency and Repository Activity
 
-To allow organizers to monitor progress:
+To help organizers track progress:
 
-- Each team must perform **at least one push per hour**.
-- Recommended practice: push **at the full hour** (e.g., 19:00, 20:00, 21:00...).
-- Regular commits and pushes:
-  - reduce the risk of losing work,
-  - help track progress,
-  - simplify conflict resolution.
+- Each team must perform **at least one push every 2 hours**.
+- Recommended practice: push **at every second full hour** (e.g., 20:00, 22:00, 00:00, 02:00...).
+- Regular pushing:
+  - reduces the risk of losing work,
+  - helps document team progress,
+  - makes it easier to handle merge conflicts.
 
 ---
 
 ## 4. Technologies and Tools
 
 - You are free to use **any technology, programming language, framework, or tool**.
-- Both open-source and commercial tools are allowed, as long as licensing conditions are respected.
-- Technology choice is entirely up to your team.
+- Both open-source and commercial tools are allowed, as long as licensing is respected.
+- Technology selection is entirely up to your team.
 
 ---
 
 ## 5. Hackathon Timeline
 
-- Hackathon start: **18:00**  
-- Hackathon end: **06:00 (next day)**  
+- Hackathon start: **18:00**
+- Hackathon end: **06:00 (next day)**
 - At **06:00**, all Access Tokens will be revoked.
-- All final work must be present in the **master** branch before 06:00.
+- All final work must be pushed to the **master** branch before 06:00.
 
 ---
 
-## 6. Best Practices – Technical and Organizational Guidelines
+## 6. Prohibited Tools – No AI Usage Allowed
 
-### Code Quality Practices
+To ensure fairness and maintain the intended challenge level:
+
+### **The use of AI-based tools is strictly prohibited**, including but not limited to:
+- ChatGPT (all versions)
+- GitHub Copilot
+- Perplexity
+- Codeium
+- Tabnine
+- Google Gemini / Bard
+- Any other code-generation or text-generation AI
+- Automated bot assistance inside IDEs or browsers
+
+Teams must rely solely on their **knowledge, skills, and manual coding abilities**.
+
+Violation of this rule may result in **penalties or disqualification**.
+
+---
+
+## 7. Best Practices – Technical and Organizational Guidelines
+
+### Code Quality
 - Follow language-specific style guides (PEP8, PSR-12, Google Style Guide, etc.).
-- Use meaningful and readable names for variables, functions, classes, and files.
-- Comment complex or non-obvious parts of the code.
-- Split your project into logical modules — avoid placing everything in a single file.
+- Use clear and meaningful names for variables, functions, and modules.
+- Comment complex logic when needed.
+- Split the code base into logical modules — avoid monolithic files.
 
-### Repository Practices
-- Write clear and concise commit messages (e.g., “Add authentication module”, “Fix API error”).
-- Use `.gitignore` to exclude unnecessary files such as temporary data, logs, binaries, or dependencies.
-- If your project requires installation or configuration steps, add an `INSTALL.md` file or an “Installation / Run Guide” section in this README.
+### Repository Good Practices
+- Write clean commit messages (e.g., “Add login module”, “Fix API authentication bug”).
+- Use `.gitignore` to exclude temporary files, logs, and build artifacts.
+- Provide installation or run instructions if needed (README section or `INSTALL.md`).
 
 ### Teamwork Practices
-- Assign roles within the team (backend, frontend, integration, documentation, etc.).
-- Communicate actively — a hackathon is a sprint.
-- Define an internal Git workflow (e.g., dev → master, feature branches).
+- Assign internal roles (backend, frontend, documentation, testing, etc.).
+- Communicate frequently — this is a fast-paced event.
+- Agree on Git workflow rules (e.g., dev → master, feature branches).
 
 ### Technical Good Practices
-- Validate all input data.
-- Handle errors and unexpected cases gracefully.
-- If building an API, provide minimal documentation (OpenAPI/Swagger YAML/JSON or a markdown description).
-- Consider adding basic logging if relevant to your project.
+- Validate input data.
+- Handle errors properly.
+- If building an API, include minimal documentation (OpenAPI/Swagger or Markdown).
+- Add logging if relevant and helpful.
 
 ---
 
-## 7. Contact with Organizers
+## 8. Contact with Organizers
 
-If you encounter technical issues (repository access, token problems, etc.), please contact the organizers through the official Hack4Defence communication channels.
+For repository or access issues, please contact the organizers through the official Hack4Defence communication channels.
 
 ---
 
