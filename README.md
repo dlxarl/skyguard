@@ -218,7 +218,7 @@ Violation of this rule may result in **penalties or disqualification**.
 
 ## 📞 Contact with Organizers
 
-For repository or access issues, please contact the organizers through the official Hack4Defence communication channels.
+For repository or access issues, please contact the organizers through the official **Hack4Defence** communication channels.
 
 ---
 
