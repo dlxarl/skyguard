@@ -7,7 +7,7 @@ To repozytorium służy jako główne miejsce przechowywania **całego kodu, dok
 
 ---
 
-## 1. Informacje ogólne o repozytorium
+## 📁 Informacje ogólne o repozytorium
 
 - Każdy zespół posiada **dedykowane repozytorium** oraz **indywidualny Access Token**.
 - Access Token służy do wykonywania operacji `push`, `pull` i zarządzania kodem.
@@ -16,7 +16,7 @@ To repozytorium służy jako główne miejsce przechowywania **całego kodu, dok
 
 ---
 
-## 2. Struktura pracy i zasady dotyczące branchy
+## 🔀 Struktura pracy i zasady dotyczące branchy
 
 - Głównym, ocenianym branchem jest **master**.
 - Tylko zawartość znajdująca się na branchu **master** będzie brana pod uwagę podczas oceny.
@@ -26,7 +26,7 @@ To repozytorium służy jako główne miejsce przechowywania **całego kodu, dok
 
 ---
 
-## 3. Częstotliwość commitów i aktywność repozytorium
+## ⏱️ Częstotliwość commitów i aktywność repozytorium
 
 Aby umożliwić organizatorom monitorowanie postępów:
 
@@ -39,7 +39,7 @@ Aby umożliwić organizatorom monitorowanie postępów:
 
 ---
 
-## 4. Technologie i narzędzia
+## 🛠️ Technologie i narzędzia
 
 - Uczestnicy mogą korzystać z **dowolnych technologii, języków programowania, frameworków i narzędzi**.
 - Dozwolone są rozwiązania open source oraz komercyjne (zgodnie z licencją).
@@ -47,7 +47,7 @@ Aby umożliwić organizatorom monitorowanie postępów:
 
 ---
 
-## 5. Ramy czasowe Hackathonu
+## ⏰ Ramy czasowe Hackathonu
 
 - Start wydarzenia: **18:00**
 - Koniec wydarzenia: **06:00 (następnego dnia)**
@@ -56,7 +56,7 @@ Aby umożliwić organizatorom monitorowanie postępów:
 
 ---
 
-## 6. Zakaz używania narzędzi AI
+## 🚫🤖 Zakaz używania narzędzi AI
 
 Aby zapewnić uczciwą rywalizację oraz realizację idei hackathonu:
 
@@ -76,7 +76,7 @@ Naruszenie tego zakazu może skutkować **karami lub dyskwalifikacją**.
 
 ---
 
-## 7. Dobre praktyki – zalecenia techniczne i organizacyjne
+## 🌟 Dobre praktyki – zalecenia
 
 ### Jakość kodu
 - Stosuj standardy kodowania odpowiednie dla wybranego języka (PEP8, PSR-12, Google Style Guide itd.).
@@ -102,7 +102,7 @@ Naruszenie tego zakazu może skutkować **karami lub dyskwalifikacją**.
 
 ---
 
-## 8. Kontakt z organizatorami
+## 📞 Kontakt z organizatorami
 
 W przypadku problemów technicznych (repozytoria, dostęp, tokeny), prosimy o kontakt poprzez oficjalne kanały komunikacyjne hackathonu **Hack4Defence**.
 
@@ -121,7 +121,7 @@ This repository serves as the main storage for **all code, documentation, and pr
 
 ---
 
-## 1. General Repository Information
+## 📁 General Repository Information
 
 - Each team receives a **dedicated repository** and an **individual Access Token**.
 - Use your Access Token to perform `push`, `pull`, and manage your code.
@@ -130,7 +130,7 @@ This repository serves as the main storage for **all code, documentation, and pr
 
 ---
 
-## 2. Branch Structure and Rules
+## 🔀 Branch Structure and Rules
 
 - The main branch for evaluation is **master**.
 - Only the content located in the **master** branch will be assessed by the organizers.
@@ -140,7 +140,7 @@ This repository serves as the main storage for **all code, documentation, and pr
 
 ---
 
-## 3. Commit Frequency and Repository Activity
+## ⏱️ Commit Frequency and Repository Activity
 
 To help organizers track progress:
 
@@ -153,7 +153,7 @@ To help organizers track progress:
 
 ---
 
-## 4. Technologies and Tools
+## 🛠️ Technologies and Tools
 
 - You are free to use **any technology, programming language, framework, or tool**.
 - Both open-source and commercial tools are allowed, as long as licensing is respected.
@@ -161,7 +161,7 @@ To help organizers track progress:
 
 ---
 
-## 5. Hackathon Timeline
+## ⏰ Hackathon Timeline
 
 - Hackathon start: **18:00**
 - Hackathon end: **06:00 (next day)**
@@ -170,7 +170,7 @@ To help organizers track progress:
 
 ---
 
-## 6. Prohibited Tools – No AI Usage Allowed
+## 🚫🤖 Prohibited Tools – No AI Usage Allowed
 
 To ensure fairness and maintain the intended challenge level:
 
@@ -190,7 +190,7 @@ Violation of this rule may result in **penalties or disqualification**.
 
 ---
 
-## 7. Best Practices – Technical and Organizational Guidelines
+## 🌟 Best Practices – Technical and Organizational Guidelines
 
 ### Code Quality
 - Follow language-specific style guides (PEP8, PSR-12, Google Style Guide, etc.).
@@ -216,7 +216,7 @@ Violation of this rule may result in **penalties or disqualification**.
 
 ---
 
-## 8. Contact with Organizers
+## 📞 Contact with Organizers
 
 For repository or access issues, please contact the organizers through the official Hack4Defence communication channels.
 
