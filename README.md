@@ -111,9 +111,8 @@ W przypadku problemów technicznych (repozytoria, dostęp, tokeny), prosimy o ko
 **Powodzenia i świetnej zabawy! 🚀**  
 Niech wygra najlepszy projekt!
 
----
 
-🇬🇧 **English Version**
+## 🇬🇧 **English Version**
 
 # Hack4Defence – Team Repository
 
