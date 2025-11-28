@@ -1,4 +1,4 @@
-🇵🇱 **Polska Wersja**
+## 🇵🇱 **Polska Wersja**
 
 # Hack4Defence – Repozytorium Zespołu
 
