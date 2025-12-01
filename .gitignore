@@ -34,3 +34,4 @@ Thumbs.db
 # General
 log/
 *.log
+/backend/backend/.env
