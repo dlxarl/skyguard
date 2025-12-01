@@ -1,18 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django_admin_geomap import GeoItem
 
 
-class Target(models.Model):
+class Target(models.Model, GeoItem):
     STATUS_CHOICES = (
         ('pending', 'Pending'),
         ('confirmed', 'Confirmed'),
     )
+
     TYPE_CHOICES = (
         ('drone', 'Drone'),
         ('rocket', 'Rocket'),
-        ('plane', 'Plane'),
-        ('helicopter', 'Helicopter'),
-        ('explosion', 'Explosion'),
+        ('artillery', 'Artillery'),
+        ('vehicle', 'Vehicle'),
         ('other', 'Other'),
     )
 
@@ -25,15 +26,32 @@ class Target(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    @property
+    def geomap_longitude(self):
+        return str(self.longitude) if self.longitude else ''
+
+    @property
+    def geomap_latitude(self):
+        return str(self.latitude) if self.latitude else ''
+
     def __str__(self):
         return self.title
 
-class Shelter(models.Model):
+
+class Shelter(models.Model, GeoItem):
     title = models.CharField(max_length=200, default="Shelter")
     address = models.CharField(max_length=300, blank=True)
     capacity = models.IntegerField(default=0, help_text="Capacity (people)")
     latitude = models.FloatField()
     longitude = models.FloatField()
+
+    @property
+    def geomap_longitude(self):
+        return str(self.longitude) if self.longitude else ''
+
+    @property
+    def geomap_latitude(self):
+        return str(self.latitude) if self.latitude else ''
 
     def __str__(self):
         return f"Shelter: {self.title}"

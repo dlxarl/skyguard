@@ -13,6 +13,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'jazzmin',
+    'django_admin_geomap',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
