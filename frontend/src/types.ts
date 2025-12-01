@@ -14,6 +14,7 @@ export interface Target {
   latitude: number;
   longitude: number;
   status: 'pending' | 'confirmed';
+  target_type: string;
   author: number;
   created_at: string;
 }
@@ -42,4 +43,5 @@ export interface NewTargetData {
   description: string;
   latitude: string;
   longitude: string;
+  target_type: string;
 }
