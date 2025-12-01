@@ -19,6 +19,15 @@ export interface Target {
   created_at: string;
 }
 
+export interface Shelter {
+  id: number;
+  title: string;
+  address: string;
+  capacity: number;
+  latitude: number;
+  longitude: number;
+}
+
 export interface AuthResponse {
   access: string;
   refresh: string;

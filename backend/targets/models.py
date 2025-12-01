@@ -1,12 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Target(models.Model):
     STATUS_CHOICES = (
         ('pending', 'Pending'),
         ('confirmed', 'Confirmed'),
     )
-
     TYPE_CHOICES = (
         ('drone', 'Drone'),
         ('rocket', 'Rocket'),
@@ -27,3 +27,13 @@ class Target(models.Model):
 
     def __str__(self):
         return self.title
+
+class Shelter(models.Model):
+    title = models.CharField(max_length=200, default="Shelter")
+    address = models.CharField(max_length=300, blank=True)
+    capacity = models.IntegerField(default=0, help_text="Capacity (people)")
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+
+    def __str__(self):
+        return f"Shelter: {self.title}"

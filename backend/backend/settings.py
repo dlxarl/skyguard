@@ -12,6 +12,7 @@ DEBUG = os.getenv("DEBUG") == "True"
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -98,4 +99,36 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+}
+
+JAZZMIN_SETTINGS = {
+    "site_title": "SkyGuard",
+    "site_header": "SkyGuard",
+    "site_brand": "SkyGuard",
+    "welcome_sign": "Welcome to Admin Panel",
+    "copyright": "Utoczki",
+
+    "search_model": "targets.Target",
+
+    "topmenu_links": [
+        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "View Map", "url": "http://localhost:5173", "new_window": True},
+    ],
+
+    "show_sidebar": True,
+    "navigation_expanded": True,
+
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "targets.Target": "fas fa-crosshairs",
+        "users.Profile": "fas fa-id-card",
+    },
+
+    "order_with_respect_to": ["targets", "users", "auth"],
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "darkly",
 }
