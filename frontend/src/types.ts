@@ -5,6 +5,7 @@ export interface User {
   first_name: string;
   last_name: string;
   passport_id: string;
+  trust_rating: number;
 }
 
 export interface Target {
