@@ -16,6 +16,7 @@ export interface Target {
   longitude: number;
   status: 'pending' | 'unconfirmed' | 'confirmed' | 'rejected';
   target_type: 'drone' | 'rocket' | 'plane' | 'helicopter' | 'bang';
+  danger_radius: number;
   probability?: 'low' | 'medium' | 'high';
   report_count?: number;
   weighted_score?: number;
@@ -59,6 +60,7 @@ export interface NewTargetData {
   latitude: string;
   longitude: string;
   target_type: string;
+  danger_radius: number;
 }
 
 // Target types

@@ -4,8 +4,6 @@ from .models import Target, Shelter
 
 
 class MapPickerWidget(forms.Widget):
-    """Custom widget that displays a map picker for coordinates."""
-    
     template_name = 'admin/targets/map_picker_widget.html'
     
     class Media:

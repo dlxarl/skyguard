@@ -156,14 +156,12 @@ const MapBackground: React.FC<MapProps> = ({ targets, shelters }) => {
         </div>
       </div>
 
-      {/* Render targets with status-based styling */}
       {visibleTargets.map((target) => (
         <React.Fragment key={`target-${target.id}`}>
-          {/* Show circle for confirmed/unconfirmed threats */}
           {(target.status === 'confirmed' || target.status === 'unconfirmed') && (
             <Circle
               center={[target.latitude, target.longitude]}
-              radius={target.probability === 'high' ? 5000 : target.probability === 'medium' ? 3000 : 1500}
+              radius={(target.danger_radius || 2) * 1000}
               pathOptions={{
                 color: probabilityColors[target.probability || 'low'],
                 fillColor: probabilityColors[target.probability || 'low'],
@@ -178,41 +176,56 @@ const MapBackground: React.FC<MapProps> = ({ targets, shelters }) => {
           >
             <Popup>
               <div style={{ minWidth: '180px' }}>
-                <strong style={{ color: '#FF3B30' }}>
-                  {getTargetEmoji(target.target_type)} {target.title}
-                </strong>
-                <br />
-                <span 
-                  style={{ 
-                    background: statusColors[target.status], 
-                    color: 'white', 
-                    padding: '2px 6px', 
-                    borderRadius: '4px',
-                    fontSize: '11px',
-                    marginRight: '4px'
-                  }}
-                >
-                  {statusLabels[target.status]}
-                </span>
-                {target.probability && (
+                <div style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '8px',
+                  marginBottom: '8px'
+                }}>
+                  <span style={{ fontSize: '20px' }}>{getTargetEmoji(target.target_type)}</span>
+                  <strong style={{ color: '#333', fontSize: '14px' }}>{target.title}</strong>
+                </div>
+                <div style={{ display: 'flex', gap: '6px', marginBottom: '10px' }}>
                   <span 
                     style={{ 
-                      background: probabilityColors[target.probability], 
+                      background: statusColors[target.status], 
                       color: 'white', 
-                      padding: '2px 6px', 
-                      borderRadius: '4px',
-                      fontSize: '11px'
+                      padding: '3px 8px', 
+                      borderRadius: '6px',
+                      fontSize: '11px',
+                      fontWeight: 600
                     }}
                   >
-                    {target.probability.toUpperCase()}
+                    {statusLabels[target.status]}
                   </span>
+                  {target.probability && (
+                    <span 
+                      style={{ 
+                        background: probabilityColors[target.probability], 
+                        color: 'white', 
+                        padding: '3px 8px', 
+                        borderRadius: '6px',
+                        fontSize: '11px',
+                        fontWeight: 600
+                      }}
+                    >
+                      {target.probability.toUpperCase()}
+                    </span>
+                  )}
+                </div>
+                {target.description && (
+                  <p style={{ margin: '0 0 8px 0', color: '#555', fontSize: '12px' }}>
+                    {target.description}
+                  </p>
                 )}
-                <br /><br />
-                {target.description && <>{target.description}<br /></>}
                 {target.report_count && target.report_count > 1 && (
-                  <>📊 Reports: {target.report_count}<br /></>
+                  <p style={{ margin: '0 0 6px 0', color: '#666', fontSize: '12px' }}>
+                    📊 Reports: {target.report_count}
+                  </p>
                 )}
-                <small>{new Date(target.created_at).toLocaleString()}</small>
+                <p style={{ margin: 0, color: '#888', fontSize: '11px' }}>
+                  {new Date(target.created_at).toLocaleString()}
+                </p>
               </div>
             </Popup>
           </Marker>
@@ -222,9 +235,25 @@ const MapBackground: React.FC<MapProps> = ({ targets, shelters }) => {
       {shelters.map((shelter) => (
         <Marker key={`s-${shelter.id}`} position={[shelter.latitude, shelter.longitude]} icon={greenIcon}>
           <Popup>
-            <strong style={{ color: '#34C759' }}>🛡️ {shelter.title}</strong><br />
-            {shelter.address}<br />
-            Capacity: {shelter.capacity} people
+            <div style={{ minWidth: '160px' }}>
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '8px',
+                marginBottom: '8px'
+              }}>
+                <span style={{ fontSize: '20px' }}>🛡️</span>
+                <strong style={{ color: '#333', fontSize: '14px' }}>{shelter.title}</strong>
+              </div>
+              {shelter.address && (
+                <p style={{ margin: '0 0 6px 0', color: '#333', fontSize: '12px' }}>
+                  📍 {shelter.address}
+                </p>
+              )}
+              <p style={{ margin: 0, color: '#333', fontSize: '12px' }}>
+                Capacity: {shelter.capacity} people
+              </p>
+            </div>
           </Popup>
         </Marker>
       ))}

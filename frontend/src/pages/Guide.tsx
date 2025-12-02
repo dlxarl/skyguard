@@ -316,9 +316,7 @@ const Guide: React.FC = () => {
       {activeSection === 'intro' && (
         <>
           <div style={cardStyle}>
-            <h2 style={{ margin: '0 0 16px 0', color: '#1a1a2e' }}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
- <path d="M11.302 21.6149C11.5234 21.7441 11.6341 21.8087 11.7903 21.8422C11.9116 21.8682 12.0884 21.8682 12.2097 21.8422C12.3659 21.8087 12.4766 21.7441 12.698 21.6149C14.646 20.4785 20 16.9085 20 12.0001V8.20007C20 7.12617 20 6.58923 19.8345 6.20807C19.6662 5.82067 19.4986 5.61458 19.1536 5.37097C18.8141 5.13129 18.1486 4.99289 16.8177 4.71609C15.3508 4.41101 14.2243 3.8601 13.1944 3.06339C12.7005 2.68133 12.4536 2.49031 12.2603 2.43821C12.0564 2.38323 11.9436 2.38323 11.7397 2.43821C11.5464 2.49031 11.2995 2.68134 10.8056 3.06339C9.77572 3.8601 8.6492 4.41101 7.1823 4.71609C5.85137 4.99289 5.18591 5.13129 4.84645 5.37097C4.50142 5.61458 4.33379 5.82067 4.16554 6.20807C4 6.58923 4 7.12617 4 8.20007V12.0001C4 16.9085 9.35396 20.4785 11.302 21.6149Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
- </svg> Why This Matters</h2>
+            <h2 style={{ margin: '0 0 16px 0', color: '#1a1a2e' }}>Why This Matters</h2>
             <p style={{ margin: 0, lineHeight: 1.7, color: '#444' }}>
               Early detection of aerial threats can save lives. Every citizen can become part of 
               the early warning system by reporting detected targets. Your reports help others 
@@ -327,10 +325,7 @@ const Guide: React.FC = () => {
           </div>
 
           <div style={cardStyle}>
-            <h2 style={{ margin: '0 0 16px 0', color: '#1a1a2e' }}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
- <path d="M2.42012 12.7132C2.28394 12.4975 2.21584 12.3897 2.17772 12.2234C2.14909 12.0985 2.14909 11.9015 2.17772 11.7766C2.21584 11.6103 2.28394 11.5025 2.42012 11.2868C3.54553 9.50484 6.8954 5 12.0004 5C17.1054 5 20.4553 9.50484 21.5807 11.2868C21.7169 11.5025 21.785 11.6103 21.8231 11.7766C21.8517 11.9015 21.8517 12.0985 21.8231 12.2234C21.785 12.3897 21.7169 12.4975 21.5807 12.7132C20.4553 14.4952 17.1054 19 12.0004 19C6.8954 19 3.54553 14.4952 2.42012 12.7132Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
- <path d="M12.0004 15C13.6573 15 15.0004 13.6569 15.0004 12C15.0004 10.3431 13.6573 9 12.0004 9C10.3435 9 9.0004 10.3431 9.0004 12C9.0004 13.6569 10.3435 15 12.0004 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
- </svg> How to Detect Targets</h2>
+            <h2 style={{ margin: '0 0 16px 0', color: '#1a1a2e' }}>How to Detect Targets</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -380,9 +375,7 @@ const Guide: React.FC = () => {
           </div>
 
           <div style={cardStyle}>
-            <h2 style={{ margin: '0 0 16px 0', color: '#1a1a2e' }}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
- <path d="M11.9998 8.99999V13M11.9998 17H12.0098M10.6151 3.89171L2.39019 18.0983C1.93398 18.8863 1.70588 19.2803 1.73959 19.6037C1.769 19.8857 1.91677 20.142 2.14613 20.3088C2.40908 20.5 2.86435 20.5 3.77487 20.5H20.2246C21.1352 20.5 21.5904 20.5 21.8534 20.3088C22.0827 20.142 22.2305 19.8857 22.2599 19.6037C22.2936 19.2803 22.0655 18.8863 21.6093 18.0983L13.3844 3.89171C12.9299 3.10654 12.7026 2.71396 12.4061 2.58211C12.1474 2.4671 11.8521 2.4671 11.5935 2.58211C11.2969 2.71396 11.0696 3.10655 10.6151 3.89171Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
- </svg> Threat Types</h2>
+            <h2 style={{ margin: '0 0 16px 0', color: '#1a1a2e' }}>Threat Types</h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
               <div style={{ background: '#fff3e0', padding: '16px', borderRadius: '12px', textAlign: 'center' }}>
                 <img src={droneImg} alt="Drone" style={{ width: '40px', height: '40px', margin: '0 auto' }} />

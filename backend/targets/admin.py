@@ -1,30 +1,22 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from django.contrib import messages
-from django_admin_geomap import ModelAdmin as GeoModelAdmin
 from .models import Target, Shelter
 from .forms import ShelterAdminForm, TargetAdminForm
 
 
 @admin.register(Target)
-class TargetAdmin(GeoModelAdmin):
+class TargetAdmin(admin.ModelAdmin):
     form = TargetAdminForm
-    list_display = ('title', 'type_badge', 'status_badge', 'probability_badge', 'author_with_rating', 'report_count', 'created_at')
-    list_filter = ('status', 'target_type', 'probability', 'created_at')
+    list_display = ('title', 'type_badge', 'status_badge', 'probability_badge', 'danger_radius_display', 'author_with_rating', 'report_count', 'created_at')
+    list_filter = ('status', 'target_type', 'probability', 'danger_radius', 'created_at')
     search_fields = ('title', 'description', 'author__username')
     readonly_fields = ('created_at', 'resolved_at', 'report_count', 'weighted_score', 'probability', 'child_reports_list')
     actions = ['confirm_targets', 'reject_targets']
 
-    geomap_field_longitude = "id_longitude"
-    geomap_field_latitude = "id_latitude"
-    geomap_default_longitude = "31.0"
-    geomap_default_latitude = "49.0"
-    geomap_default_zoom = "6"
-    geomap_height = "400px"
-
     fieldsets = (
         ("Main Info", {
-            "fields": ("title", "description", "target_type", "status")
+            "fields": ("title", "description", "target_type", "status", "danger_radius")
         }),
         ("Location", {
             "fields": ("map_picker", "latitude", "longitude"),
@@ -40,6 +32,13 @@ class TargetAdmin(GeoModelAdmin):
             "fields": ("author", "created_at", "resolved_at")
         }),
     )
+
+    def danger_radius_display(self, obj):
+        return format_html(
+            '<span style="background:#007bff; color:white; padding:3px 8px; border-radius:4px;">{} km</span>',
+            obj.danger_radius
+        )
+    danger_radius_display.short_description = "Radius"
 
     def type_badge(self, obj):
         colors = {
@@ -156,17 +155,10 @@ class TargetAdmin(GeoModelAdmin):
 
 
 @admin.register(Shelter)
-class ShelterAdmin(GeoModelAdmin):
+class ShelterAdmin(admin.ModelAdmin):
     form = ShelterAdminForm
     list_display = ('title', 'capacity', 'coordinates')
     search_fields = ('title', 'address')
-
-    geomap_field_longitude = "id_longitude"
-    geomap_field_latitude = "id_latitude"
-    geomap_default_longitude = "31.0"
-    geomap_default_latitude = "49.0"
-    geomap_default_zoom = "6"
-    geomap_height = "400px"
 
     fieldsets = (
         ("Info", {

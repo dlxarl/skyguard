@@ -1,14 +1,23 @@
 (function() {
     'use strict';
 
+    let mapInitialized = false;
+
     function initMapPicker() {
+        if (mapInitialized) return;
+        
         if (typeof L === 'undefined') {
             console.error('Leaflet not loaded');
+            setTimeout(initMapPicker, 100);
             return;
         }
 
         const mapContainer = document.getElementById('location-map-picker');
         if (!mapContainer) {
+            return;
+        }
+
+        if (mapContainer._leaflet_id) {
             return;
         }
 
@@ -19,6 +28,8 @@
             console.error('Latitude or longitude input not found');
             return;
         }
+
+        mapInitialized = true;
 
         let initialLat = parseFloat(latInput.value) || 49.0;
         let initialLng = parseFloat(lngInput.value) || 31.0;
@@ -87,8 +98,8 @@
         searchContainer.className = 'map-search-container';
         searchContainer.innerHTML = `
             <input type="text" id="map-search-input" placeholder="Search address..." class="form-control" style="margin-bottom: 10px; width: 100%;">
-            <button type="button" id="map-search-btn" class="btn btn-primary btn-sm" style="margin-bottom: 10px;">🔍 Find</button>
-            <button type="button" id="map-locate-btn" class="btn btn-secondary btn-sm" style="margin-bottom: 10px; margin-left: 5px;">📍 My location</button>
+            <button type="button" id="map-search-btn" class="btn btn-primary btn-sm" style="margin-bottom: 10px;">Find</button>
+            <button type="button" id="map-locate-btn" class="btn btn-secondary btn-sm" style="margin-bottom: 10px; margin-left: 5px;">My location</button>
         `;
         mapContainer.parentNode.insertBefore(searchContainer, mapContainer);
 

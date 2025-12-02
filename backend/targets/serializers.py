@@ -10,12 +10,12 @@ class TargetSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'title', 'description', 
             'latitude', 'longitude', 
-            'status', 'target_type', 
+            'status', 'target_type', 'danger_radius',
             'probability', 'report_count', 'weighted_score',
             'author', 'author_username', 
             'created_at', 'resolved_at'
         ]
-        read_only_fields = ['status', 'author', 'created_at', 'probability', 'report_count', 'weighted_score', 'resolved_at']
+        read_only_fields = ['status', 'author', 'created_at', 'probability', 'report_count', 'weighted_score', 'resolved_at', 'danger_radius']
 
 
 class ShelterSerializer(serializers.ModelSerializer):

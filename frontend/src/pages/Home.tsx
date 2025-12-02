@@ -46,7 +46,7 @@ const Home: React.FC = () => {
   const [editData, setEditData] = useState({ first_name: '', last_name: '', email: '', bio: '' });
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [newTarget, setNewTarget] = useState<NewTargetData>({
-    title: '', description: '', latitude: '', longitude: '', target_type: 'drone'
+    title: '', description: '', latitude: '', longitude: '', target_type: 'drone', danger_radius: 2
   });
 
   useEffect(() => {
@@ -139,7 +139,7 @@ const Home: React.FC = () => {
           };
           await api.post('targets/', payload);
           alert('Report sent!');
-          setNewTarget({ title: '', description: '', latitude: '', longitude: '', target_type: 'drone' });
+          setNewTarget({ title: '', description: '', latitude: '', longitude: '', target_type: 'drone', danger_radius: 2 });
           fetchData();
           setActiveTab('shelters');
         } catch { alert('Failed to send report.'); } finally { setIsSending(false); }
@@ -173,8 +173,7 @@ const Home: React.FC = () => {
                   <option value="rocket">Rocket</option>
                   <option value="plane">Plane</option>
                   <option value="helicopter">Helicopter</option>
-                  <option value="explosion">Explosion</option>
-                  <option value="other">Other</option>
+                  <option value="bang">Explosion</option>
                 </select>
                 <textarea name="description" placeholder="Description (optional)..." value={newTarget.description} onChange={handleChange} rows={3} className="form-textarea" />
                 <button type="submit" disabled={isSending} className="btn btn-danger btn-full">

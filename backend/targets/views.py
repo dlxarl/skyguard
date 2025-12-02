@@ -6,10 +6,6 @@ from .serializers import TargetSerializer, ShelterSerializer
 
 
 class TargetListCreateView(generics.ListCreateAPIView):
-    """
-    GET: List all confirmed/unconfirmed targets (visible on map)
-    POST: Create new target report (auto-aggregates with nearby)
-    """
     serializer_class = TargetSerializer
 
     def get_permissions(self):
@@ -20,20 +16,17 @@ class TargetListCreateView(generics.ListCreateAPIView):
     def get_queryset(self):
         queryset = Target.objects.filter(
             status__in=['confirmed', 'unconfirmed'],
-            parent_target__isnull=True  # Only main targets, not child reports
+            parent_target__isnull=True
         )
         
-        # Filter by status
         target_status = self.request.query_params.get('status')
         if target_status in ['unconfirmed', 'confirmed']:
             queryset = queryset.filter(status=target_status)
         
-        # Filter by probability
         probability = self.request.query_params.get('probability')
         if probability in ['low', 'medium', 'high']:
             queryset = queryset.filter(probability=probability)
         
-        # Filter by type
         target_type = self.request.query_params.get('type')
         if target_type:
             queryset = queryset.filter(target_type=target_type)
@@ -56,7 +49,6 @@ class ShelterListView(generics.ListAPIView):
 
 
 class ConfirmTargetView(APIView):
-    """Admin confirms target - users get +0.25 rating"""
     permission_classes = [permissions.IsAdminUser]
     
     def post(self, request, pk):
@@ -77,7 +69,6 @@ class ConfirmTargetView(APIView):
 
 
 class RejectTargetView(APIView):
-    """Admin rejects target (false alarm) - users get -0.25 rating"""
     permission_classes = [permissions.IsAdminUser]
     
     def post(self, request, pk):

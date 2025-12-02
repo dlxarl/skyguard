@@ -44,7 +44,6 @@
     font-style: italic;
 }
 
-/* Leaflet popup styling for dark theme */
 .leaflet-popup-content-wrapper {
     background-color: #2d2d2d;
     color: #fff;
@@ -54,12 +53,10 @@
     background-color: #2d2d2d;
 }
 
-/* Custom marker styling */
 .leaflet-marker-icon {
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     #location-map-picker {
         height: 300px;
