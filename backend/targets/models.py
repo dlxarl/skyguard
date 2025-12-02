@@ -202,7 +202,7 @@ class Target(models.Model, GeoItem):
 
 @receiver(post_save, sender=Target)
 def notify_on_target_confirmed(sender, instance, created, **kwargs):
-    if instance.status == 'confirmed' and not instance.notifications_sent:
+    if instance.status in ['confirmed', 'unconfirmed'] and not instance.notifications_sent:
         from .notifications import notify_users_about_threat
         notify_users_about_threat(instance)
         Target.objects.filter(pk=instance.pk).update(notifications_sent=True)

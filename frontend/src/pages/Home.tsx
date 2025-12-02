@@ -231,7 +231,6 @@ const Home: React.FC = () => {
                   <option value="rocket">Rocket</option>
                   <option value="plane">Plane</option>
                   <option value="helicopter">Helicopter</option>
-                  <option value="bang">Explosion</option>
                 </select>
                 <textarea name="description" placeholder="Description (optional)..." value={newTarget.description} onChange={handleChange} rows={3} className="form-textarea" />
                 <button type="submit" disabled={isSending} className="btn btn-danger btn-full">
@@ -308,7 +307,7 @@ const Home: React.FC = () => {
                   </div>
 
                   <div className="telegram-section">
-                    <h3>🔔 Telegram Notifications</h3>
+                    <h3>Telegram Notifications</h3>
                     <p className="telegram-description">
                       Get instant alerts when threats are detected within 30km of your location.
                     </p>
@@ -316,7 +315,6 @@ const Home: React.FC = () => {
                     {userData.telegram_chat_id ? (
                       <div className="telegram-connected">
                         <div className="connected-status">
-                          <span className="status-icon">✅</span>
                           <span>Telegram connected</span>
                         </div>
                         
@@ -348,7 +346,7 @@ const Home: React.FC = () => {
                           className="btn btn-telegram btn-full"
                           disabled={isGeneratingLink}
                         >
-                          {isGeneratingLink ? '⏳ Generating...' : '📱 Connect Telegram'}
+                          {isGeneratingLink ? 'Generating...' : 'Connect Telegram'}
                         </button>
                         
                         {telegramLink && (
@@ -360,7 +358,7 @@ const Home: React.FC = () => {
                               className="btn btn-secondary btn-full"
                               style={{ marginTop: '10px' }}
                             >
-                              🔄 Check Connection
+                              Check Connection
                             </button>
                           </div>
                         )}

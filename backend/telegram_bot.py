@@ -41,10 +41,18 @@ def handle_message(message: dict):
     username = message['from'].get('username', 'User')
     
     print(f"Message from {username} ({chat_id}): {text}")
+    print(f"  Raw text bytes: {text.encode()}")
     
     if text.startswith('/start '):
         code = text.split(' ', 1)[1].strip().upper()
+        print(f"  Extracted code: '{code}'")
+        
+        from users.models import TelegramLinkCode
+        all_codes = TelegramLinkCode.objects.filter(used=False)
+        print(f"  Available codes in DB: {[c.code for c in all_codes]}")
+        
         user, link = get_user_by_code(code)
+        print(f"  Lookup result: user={user}, link={link}")
         
         if user and link:
             if not hasattr(user, 'profile'):
