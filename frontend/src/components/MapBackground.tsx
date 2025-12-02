@@ -139,10 +139,6 @@ const MapBackground: React.FC<MapProps> = ({ targets, shelters }) => {
             <span>Helicopter</span>
           </div>
           <div className="map-legend-item">
-            <img src={BangIcon} alt="Bang" width="20" height="20" />
-            <span>Bang</span>
-          </div>
-          <div className="map-legend-item">
             <div className="map-legend-radius"></div>
             <span>Damage radius</span>
           </div>

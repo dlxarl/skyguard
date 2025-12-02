@@ -59,6 +59,12 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     fetchData();
+    
+    const interval = setInterval(() => {
+      fetchData();
+    }, 5000);
+    
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
@@ -367,7 +373,7 @@ const Home: React.FC = () => {
 
                     {userData.last_latitude && userData.last_longitude && (
                       <div className="location-info-display">
-                        <p className="location-info">📍 Last location: {userData.last_latitude.toFixed(4)}, {userData.last_longitude.toFixed(4)}</p>
+                        <p className="location-info">Last location: {userData.last_latitude.toFixed(4)}, {userData.last_longitude.toFixed(4)}</p>
                         <p className="location-hint">Location updates automatically when you send reports</p>
                       </div>
                     )}
