@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -33,6 +33,8 @@ const LocationController = () => {
 };
 
 const MapBackground: React.FC<MapProps> = ({ targets, shelters }) => {
+  const [legendOpen, setLegendOpen] = useState(true);
+
   return (
     <MapContainer
       center={[49.0, 31.0]}
@@ -45,6 +47,42 @@ const MapBackground: React.FC<MapProps> = ({ targets, shelters }) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <LocationController />
+
+      {/* Map Legend */}
+      <div className="map-legend">
+        <div className="map-legend-header" onClick={() => setLegendOpen(!legendOpen)}>
+          <span className="map-legend-title">Map Legend</span>
+          <svg 
+            className={`map-legend-toggle ${legendOpen ? '' : 'collapsed'}`}
+            width="16" 
+            height="16" 
+            viewBox="0 0 24 24" 
+            fill="none"
+          >
+            <path d="M18 15L12 9L6 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+        <div className={`map-legend-content ${legendOpen ? 'open' : 'closed'}`}>
+          <div className="map-legend-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF3B30" stroke="white" strokeWidth="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>Threat</span>
+          </div>
+          <div className="map-legend-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#34C759" stroke="white" strokeWidth="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>Shelter</span>
+          </div>
+          <div className="map-legend-item">
+            <div className="map-legend-radius"></div>
+            <span>Damage radius</span>
+          </div>
+        </div>
+      </div>
 
       {targets.map((target) => (
         <Marker key={`t-${target.id}`} position={[target.latitude, target.longitude]} icon={redIcon}>

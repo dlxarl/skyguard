@@ -26,7 +26,7 @@ html, body {
 }
 
 body {
-  font-family: 'Titillium Web', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Titillium Web', system-ui, Avenir, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: var(--text-color);
@@ -111,7 +111,105 @@ a:hover {
   z-index: 9999;
 }
 
+.map-legend {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  background-color: rgba(171, 171, 171, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  animation: legendSlideIn 0.3s ease-out;
+  font-family: 'Titillium Web', system-ui, Avenir, Arial, sans-serif;
+}
+
+@keyframes legendSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.map-legend-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  gap: 8px;
+}
+
+.map-legend-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.map-legend-toggle {
+  color: #666;
+  transition: transform 0.3s ease;
+}
+
+.map-legend-toggle.collapsed {
+  transform: rotate(180deg);
+}
+
+.map-legend-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease, margin-top 0.3s ease;
+}
+
+.map-legend-content.open {
+  max-height: 100px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.map-legend-content.closed {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-10px);
+  margin-top: 0;
+}
+
+.map-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #333;
+}
+
+.map-legend-radius {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(255, 59, 48, 0.3);
+  border: 2px solid #FF3B30;
+}
+
 .menu-item {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -120,18 +218,36 @@ a:hover {
   border-radius: 999px;
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
   background-color: transparent;
   color: #494949;
+  z-index: 1;
 }
 
-.menu-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.menu-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: -1;
+}
+
+.menu-item:hover::before {
+  opacity: 0.5;
+  transform: scale(1);
 }
 
 .menu-item.active {
-  background-color: rgba(255, 255, 255, 0.2);
   color: #000000;
+}
+
+.menu-item.active::before {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .menu-item-label {
