@@ -191,17 +191,6 @@ const Home: React.FC = () => {
           )
         )}
 
-        {activeTab === 'guide' && (
-          <div className="form-card" style={{ textAlign: 'left' }}>
-            <h2 style={{ textAlign: 'center' }}>Guide</h2>
-            <ul className="guide-list">
-              <li><strong>Shelters:</strong> View safe zones.</li>
-              <li><strong>Report:</strong> Send GPS threat data.</li>
-              <li><strong>Red:</strong> Confirmed threats.</li>
-            </ul>
-          </div>
-        )}
-
         {activeTab === 'profile' && (
           isAuthenticated ? (
             <div className="profile-fullscreen">
@@ -283,7 +272,7 @@ const Home: React.FC = () => {
           <IconReport />
           <span className="menu-item-label">Report</span>
         </button>
-        <button onClick={() => setActiveTab('guide')} className={`menu-item ${activeTab === 'guide' ? 'active' : ''}`}>
+        <button onClick={() => navigate('/guide')} className="menu-item">
           <IconGuide />
           <span className="menu-item-label">Guide</span>
         </button>
