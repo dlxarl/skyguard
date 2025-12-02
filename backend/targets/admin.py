@@ -46,9 +46,9 @@ class TargetAdmin(GeoModelAdmin):
         colors = {
             'drone': 'info',
             'rocket': 'danger',
-            'artillery': 'warning',
-            'vehicle': 'primary',
-            'other': 'secondary',
+            'plane': 'warning',
+            'helicopter': 'primary',
+            'bang': 'secondary',
         }
         color = colors.get(obj.target_type, 'secondary')
         return format_html(

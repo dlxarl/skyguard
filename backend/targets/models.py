@@ -12,9 +12,9 @@ class Target(models.Model, GeoItem):
     TYPE_CHOICES = (
         ('drone', 'Drone'),
         ('rocket', 'Rocket'),
-        ('artillery', 'Artillery'),
-        ('vehicle', 'Vehicle'),
-        ('other', 'Other'),
+        ('plane', 'Plane'),
+        ('helicopter', 'Helicopter'),
+        ('bang', 'Bang'),
     )
 
     title = models.CharField(max_length=200)

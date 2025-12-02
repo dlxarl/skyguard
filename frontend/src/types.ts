@@ -15,7 +15,7 @@ export interface Target {
   latitude: number;
   longitude: number;
   status: 'pending' | 'confirmed';
-  target_type: string;
+  target_type: 'drone' | 'rocket' | 'plane' | 'helicopter' | 'bang';
   author: number;
   created_at: string;
 }
