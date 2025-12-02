@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django_admin_geomap import GeoItem
 from math import radians, cos, sin, asin, sqrt
+from django.db.models.signals import pre_save, post_save, post_delete
+from django.dispatch import receiver
 
 
 def haversine(lon1, lat1, lon2, lat2):
@@ -52,6 +54,7 @@ class Target(models.Model, GeoItem):
     danger_radius = models.IntegerField(choices=RADIUS_CHOICES, default=2, help_text="Danger radius in km")
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+    notifications_sent = models.BooleanField(default=False)
     
     probability = models.CharField(max_length=20, choices=PROBABILITY_CHOICES, default='low', blank=True)
     report_count = models.IntegerField(default=1)
@@ -195,6 +198,41 @@ class Target(models.Model, GeoItem):
             new_rating = self.author.profile.trust_rating + amount
             self.author.profile.trust_rating = max(-5, min(5, new_rating))
             self.author.profile.save(update_fields=['trust_rating'])
+
+
+@receiver(post_save, sender=Target)
+def notify_on_target_confirmed(sender, instance, created, **kwargs):
+    if instance.status == 'confirmed' and not instance.notifications_sent:
+        from .notifications import notify_users_about_threat
+        notify_users_about_threat(instance)
+        Target.objects.filter(pk=instance.pk).update(notifications_sent=True)
+
+
+_all_clear_check_in_progress = False
+
+
+@receiver(post_save, sender=Target)
+def check_all_clear_on_status_change(sender, instance, **kwargs):
+    global _all_clear_check_in_progress
+    if instance.status != 'confirmed' and not _all_clear_check_in_progress:
+        _all_clear_check_in_progress = True
+        try:
+            from .notifications import notify_all_clear
+            notify_all_clear()
+        finally:
+            _all_clear_check_in_progress = False
+
+
+@receiver(post_delete, sender=Target)
+def check_all_clear_on_delete(sender, instance, **kwargs):
+    global _all_clear_check_in_progress
+    if instance.status == 'confirmed' and not _all_clear_check_in_progress:
+        _all_clear_check_in_progress = True
+        try:
+            from .notifications import notify_all_clear
+            notify_all_clear()
+        finally:
+            _all_clear_check_in_progress = False
 
 
 class Shelter(models.Model, GeoItem):

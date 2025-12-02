@@ -15,6 +15,10 @@ interface UserData {
   trust_rating: number;
   avatar: string | null;
   bio: string;
+  telegram_chat_id?: string;
+  notifications_enabled?: boolean;
+  last_latitude?: number;
+  last_longitude?: number;
 }
 
 const IconShelter = () => (
@@ -48,6 +52,10 @@ const Home: React.FC = () => {
   const [newTarget, setNewTarget] = useState<NewTargetData>({
     title: '', description: '', latitude: '', longitude: '', target_type: 'drone', danger_radius: 2
   });
+  const [telegramChatId, setTelegramChatId] = useState('');
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+  const [telegramLink, setTelegramLink] = useState<{ code: string; bot_link: string } | null>(null);
+  const [isGeneratingLink, setIsGeneratingLink] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -69,6 +77,8 @@ const Home: React.FC = () => {
         email: res.data.email || '',
         bio: res.data.bio || ''
       });
+      setTelegramChatId(res.data.telegram_chat_id || '');
+      setNotificationsEnabled(res.data.notifications_enabled !== false);
     } catch (error) {
       console.error(error);
     }
@@ -109,6 +119,50 @@ const Home: React.FC = () => {
     }
   };
 
+  const handleSaveTelegram = async () => {
+    try {
+      await api.post('me/telegram/', {
+        telegram_chat_id: telegramChatId,
+        notifications_enabled: notificationsEnabled
+      });
+      fetchUserData();
+      alert('Telegram settings saved!');
+    } catch (error) {
+      console.error(error);
+      alert('Failed to save Telegram settings');
+    }
+  };
+
+  const handleConnectTelegram = async () => {
+    setIsGeneratingLink(true);
+    try {
+      const res = await api.post<{ code: string; bot_link: string }>('me/telegram/link/');
+      setTelegramLink(res.data);
+      
+      if (res.data.bot_link) {
+        window.open(res.data.bot_link, '_blank');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Failed to generate link');
+    } finally {
+      setIsGeneratingLink(false);
+    }
+  };
+
+  const handleDisconnectTelegram = async () => {
+    try {
+      await api.post('me/telegram/', {
+        telegram_chat_id: '',
+        notifications_enabled: false
+      });
+      fetchUserData();
+      setTelegramLink(null);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const fetchData = async () => {
     try {
       const [targetsRes, sheltersRes] = await Promise.all([
@@ -138,6 +192,10 @@ const Home: React.FC = () => {
             longitude: position.coords.longitude.toString()
           };
           await api.post('targets/', payload);
+          await api.post('me/location/', {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          }).catch(() => {});
           alert('Report sent!');
           setNewTarget({ title: '', description: '', latitude: '', longitude: '', target_type: 'drone', danger_radius: 2 });
           fetchData();
@@ -247,6 +305,74 @@ const Home: React.FC = () => {
                     <p className={`trust-rating-value ${getRatingClass()}`}>
                       {userData.trust_rating > 0 ? '+' : ''}{userData.trust_rating}
                     </p>
+                  </div>
+
+                  <div className="telegram-section">
+                    <h3>🔔 Telegram Notifications</h3>
+                    <p className="telegram-description">
+                      Get instant alerts when threats are detected within 30km of your location.
+                    </p>
+                    
+                    {userData.telegram_chat_id ? (
+                      <div className="telegram-connected">
+                        <div className="connected-status">
+                          <span className="status-icon">✅</span>
+                          <span>Telegram connected</span>
+                        </div>
+                        
+                        <div className="form-group checkbox-group">
+                          <label className="checkbox-label">
+                            <input
+                              type="checkbox"
+                              checked={notificationsEnabled}
+                              onChange={(e) => {
+                                setNotificationsEnabled(e.target.checked);
+                                api.post('me/telegram/', {
+                                  telegram_chat_id: userData.telegram_chat_id,
+                                  notifications_enabled: e.target.checked
+                                }).then(() => fetchUserData());
+                              }}
+                            />
+                            <span>Enable notifications</span>
+                          </label>
+                        </div>
+                        
+                        <button onClick={handleDisconnectTelegram} className="btn btn-secondary btn-full">
+                          Disconnect Telegram
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="telegram-connect">
+                        <button 
+                          onClick={handleConnectTelegram} 
+                          className="btn btn-telegram btn-full"
+                          disabled={isGeneratingLink}
+                        >
+                          {isGeneratingLink ? '⏳ Generating...' : '📱 Connect Telegram'}
+                        </button>
+                        
+                        {telegramLink && (
+                          <div className="telegram-link-info">
+                            <p>Click the button above or use this code in the bot:</p>
+                            <code className="link-code">{telegramLink.code}</code>
+                            <button 
+                              onClick={() => fetchUserData()} 
+                              className="btn btn-secondary btn-full"
+                              style={{ marginTop: '10px' }}
+                            >
+                              🔄 Check Connection
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {userData.last_latitude && userData.last_longitude && (
+                      <div className="location-info-display">
+                        <p className="location-info">📍 Last location: {userData.last_latitude.toFixed(4)}, {userData.last_longitude.toFixed(4)}</p>
+                        <p className="location-hint">Location updates automatically when you send reports</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               )}

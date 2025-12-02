@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Target, Shelter
 from .serializers import TargetSerializer, ShelterSerializer
+from .notifications import notify_users_about_threat
 
 
 class TargetListCreateView(generics.ListCreateAPIView):
@@ -40,6 +41,33 @@ class TargetListCreateView(generics.ListCreateAPIView):
             status='pending',
             title=target_type.upper()
         )
+
+
+class PendingTargetListView(generics.ListAPIView):
+    serializer_class = TargetSerializer
+    permission_classes = [permissions.IsAdminUser]
+
+    def get_queryset(self):
+        return Target.objects.filter(status='pending')
+
+
+class VerifyTargetView(APIView):
+    permission_classes = [permissions.IsAdminUser]
+
+    def post(self, request, pk):
+        try:
+            target = Target.objects.get(pk=pk)
+            target.status = 'confirmed'
+            target.save()
+            
+            notified_count = notify_users_about_threat(target)
+            
+            return Response({
+                'status': 'Target verified successfully',
+                'notifications_sent': notified_count
+            }, status=status.HTTP_200_OK)
+        except Target.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 class ShelterListView(generics.ListAPIView):
