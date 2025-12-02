@@ -1,0 +1,26 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Django Server",
+			"type": "shell",
+			"command": "lsof -ti:8000 | xargs kill -9 2>/dev/null; sleep 1 && cd /Users/maxmariukha/Desktop/hackathonpsk/1/utoczkirepo/backend && python3 manage.py runserver 8000",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Frontend Dev Server",
+			"type": "shell",
+			"command": "cd /Users/maxmariukha/Desktop/hackathonpsk/1/utoczkirepo/frontend && npm run dev",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Telegram Bot",
+			"type": "shell",
+			"command": "cd /Users/maxmariukha/Desktop/hackathonpsk/1/utoczkirepo && python3 backend/telegram_bot.py",
+			"isBackground": true,
+			"problemMatcher": []
+		}
+	]
+}
