@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Target, Shelter
 from .serializers import TargetSerializer, ShelterSerializer
+from .notifications import notify_users_about_threat
 
 class TargetListCreateView(generics.ListCreateAPIView):
     serializer_class = TargetSerializer
@@ -33,7 +34,14 @@ class VerifyTargetView(APIView):
             target = Target.objects.get(pk=pk)
             target.status = 'confirmed'
             target.save()
-            return Response({'status': 'Target verified successfully'}, status=status.HTTP_200_OK)
+            
+            # Send Telegram notifications to users within 30km
+            notified_count = notify_users_about_threat(target)
+            
+            return Response({
+                'status': 'Target verified successfully',
+                'notifications_sent': notified_count
+            }, status=status.HTTP_200_OK)
         except Target.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 

@@ -13,10 +13,15 @@ class UserSerializer(serializers.ModelSerializer):
     trust_rating = serializers.IntegerField(source='profile.trust_rating', read_only=True)
     avatar = serializers.ImageField(source='profile.avatar', read_only=True)
     bio = serializers.CharField(source='profile.bio', read_only=True)
+    telegram_chat_id = serializers.CharField(source='profile.telegram_chat_id', read_only=True)
+    notifications_enabled = serializers.BooleanField(source='profile.notifications_enabled', read_only=True)
+    last_latitude = serializers.FloatField(source='profile.last_latitude', read_only=True)
+    last_longitude = serializers.FloatField(source='profile.last_longitude', read_only=True)
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'trust_rating', 'avatar', 'bio')
+        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'trust_rating', 'avatar', 'bio', 
+                  'telegram_chat_id', 'notifications_enabled', 'last_latitude', 'last_longitude')
 
 
 class UserUpdateSerializer(serializers.ModelSerializer):
