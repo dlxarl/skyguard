@@ -6,7 +6,7 @@ from django.dispatch import receiver
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    trust_rating = models.IntegerField(default=0)
+    trust_rating = models.FloatField(default=0)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
     bio = models.TextField(blank=True, max_length=500)
 

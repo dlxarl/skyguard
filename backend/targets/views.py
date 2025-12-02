@@ -4,7 +4,12 @@ from rest_framework.views import APIView
 from .models import Target, Shelter
 from .serializers import TargetSerializer, ShelterSerializer
 
+
 class TargetListCreateView(generics.ListCreateAPIView):
+    """
+    GET: List all confirmed/unconfirmed targets (visible on map)
+    POST: Create new target report (auto-aggregates with nearby)
+    """
     serializer_class = TargetSerializer
 
     def get_permissions(self):
@@ -13,31 +18,80 @@ class TargetListCreateView(generics.ListCreateAPIView):
         return [permissions.AllowAny()]
 
     def get_queryset(self):
-        return Target.objects.filter(status='confirmed')
+        queryset = Target.objects.filter(
+            status__in=['confirmed', 'unconfirmed'],
+            parent_target__isnull=True  # Only main targets, not child reports
+        )
+        
+        # Filter by status
+        target_status = self.request.query_params.get('status')
+        if target_status in ['unconfirmed', 'confirmed']:
+            queryset = queryset.filter(status=target_status)
+        
+        # Filter by probability
+        probability = self.request.query_params.get('probability')
+        if probability in ['low', 'medium', 'high']:
+            queryset = queryset.filter(probability=probability)
+        
+        # Filter by type
+        target_type = self.request.query_params.get('type')
+        if target_type:
+            queryset = queryset.filter(target_type=target_type)
+        
+        return queryset
 
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user, status='pending')
+        target_type = serializer.validated_data.get('target_type', 'drone')
+        serializer.save(
+            author=self.request.user, 
+            status='pending',
+            title=target_type.upper()
+        )
 
-class PendingTargetListView(generics.ListAPIView):
-    serializer_class = TargetSerializer
-    permission_classes = [permissions.IsAdminUser]
-
-    def get_queryset(self):
-        return Target.objects.filter(status='pending')
-
-class VerifyTargetView(APIView):
-    permission_classes = [permissions.IsAdminUser]
-
-    def post(self, request, pk):
-        try:
-            target = Target.objects.get(pk=pk)
-            target.status = 'confirmed'
-            target.save()
-            return Response({'status': 'Target verified successfully'}, status=status.HTTP_200_OK)
-        except Target.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
 
 class ShelterListView(generics.ListAPIView):
     queryset = Shelter.objects.all()
     serializer_class = ShelterSerializer
     permission_classes = [permissions.AllowAny]
+
+
+class ConfirmTargetView(APIView):
+    """Admin confirms target - users get +0.25 rating"""
+    permission_classes = [permissions.IsAdminUser]
+    
+    def post(self, request, pk):
+        try:
+            target = Target.objects.get(pk=pk)
+            if target.status != 'unconfirmed':
+                return Response(
+                    {'error': f'Target is already {target.status}'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            target.confirm()
+            return Response({
+                'status': 'confirmed',
+                'message': f'Target confirmed. {target.report_count} users rewarded with +0.25 rating.'
+            })
+        except Target.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class RejectTargetView(APIView):
+    """Admin rejects target (false alarm) - users get -0.25 rating"""
+    permission_classes = [permissions.IsAdminUser]
+    
+    def post(self, request, pk):
+        try:
+            target = Target.objects.get(pk=pk)
+            if target.status != 'unconfirmed':
+                return Response(
+                    {'error': f'Target is already {target.status}'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            target.reject()
+            return Response({
+                'status': 'rejected',
+                'message': f'Target rejected. {target.report_count} users penalized with -0.25 rating.'
+            })
+        except Target.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)

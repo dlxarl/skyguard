@@ -14,10 +14,15 @@ export interface Target {
   description: string;
   latitude: number;
   longitude: number;
-  status: 'pending' | 'confirmed';
+  status: 'pending' | 'unconfirmed' | 'confirmed' | 'rejected';
   target_type: 'drone' | 'rocket' | 'plane' | 'helicopter' | 'bang';
+  probability?: 'low' | 'medium' | 'high';
+  report_count?: number;
+  weighted_score?: number;
   author: number;
+  author_username?: string;
   created_at: string;
+  resolved_at?: string | null;
 }
 
 export interface Shelter {
@@ -55,3 +60,8 @@ export interface NewTargetData {
   longitude: string;
   target_type: string;
 }
+
+// Target types
+export type TargetType = 'drone' | 'rocket' | 'plane' | 'helicopter' | 'bang';
+export type TargetStatus = 'pending' | 'unconfirmed' | 'confirmed' | 'rejected';
+export type Probability = 'low' | 'medium' | 'high';

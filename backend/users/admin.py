@@ -17,6 +17,6 @@ class UserProfileAdmin(admin.ModelAdmin):
             color = '#34C759'
         else:
             color = '#888888'
-        return f'{rating:+d}'
+        return '{:+.2f}'.format(rating)
     
     rating_display.short_description = 'Rating Display'

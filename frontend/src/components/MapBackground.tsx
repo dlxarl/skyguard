@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Circle, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { Target, Shelter } from '../types';
 
-// Import icons
 import DroneIcon from '../assets/icons/drone.svg';
 import RocketIcon from '../assets/icons/rocket.svg';
 import PlaneIcon from '../assets/icons/plane.svg';
 import HelicopterIcon from '../assets/icons/helicopter.svg';
 import BangIcon from '../assets/icons/bang.svg';
 
-// Create icon for each target type
 const createTargetIcon = (iconUrl: string) => {
   return new L.Icon({
     iconUrl,
@@ -21,7 +19,6 @@ const createTargetIcon = (iconUrl: string) => {
   });
 };
 
-// Map of target types to their icons
 const targetIcons: Record<string, L.Icon> = {
   drone: createTargetIcon(DroneIcon),
   rocket: createTargetIcon(RocketIcon),
@@ -42,12 +39,10 @@ const createShelterIcon = (color: string) => {
 
 const greenIcon = createShelterIcon('#34C759');
 
-// Get icon for target type
 const getTargetIcon = (targetType: string): L.Icon => {
   return targetIcons[targetType] || targetIcons.bang;
 };
 
-// Get emoji for target type
 const getTargetEmoji = (targetType: string): string => {
   const emojis: Record<string, string> = {
     drone: '🛸',
@@ -57,6 +52,26 @@ const getTargetEmoji = (targetType: string): string => {
     bang: '💥',
   };
   return emojis[targetType] || '⚠️';
+};
+
+const probabilityColors: Record<string, string> = {
+  low: '#6c757d',
+  medium: '#ffc107',
+  high: '#dc3545',
+};
+
+const statusColors: Record<string, string> = {
+  pending: '#17a2b8',
+  unconfirmed: '#ffc107',
+  confirmed: '#28a745',
+  rejected: '#dc3545',
+};
+
+const statusLabels: Record<string, string> = {
+  pending: '⏳ Pending',
+  unconfirmed: '❓ Unconfirmed',
+  confirmed: '✅ Confirmed',
+  rejected: '❌ Rejected',
 };
 
 interface MapProps {
@@ -77,6 +92,8 @@ const LocationController = () => {
 const MapBackground: React.FC<MapProps> = ({ targets, shelters }) => {
   const [legendOpen, setLegendOpen] = useState(true);
 
+  const visibleTargets = targets.filter(t => t.status !== 'rejected');
+
   return (
     <MapContainer
       center={[49.0, 31.0]}
@@ -90,7 +107,7 @@ const MapBackground: React.FC<MapProps> = ({ targets, shelters }) => {
       />
       <LocationController />
 
-      {/* Map Legend */}
+      {}
       <div className="map-legend">
         <div className="map-legend-header" onClick={() => setLegendOpen(!legendOpen)}>
           <span className="map-legend-title">Map Legend</span>
@@ -139,15 +156,67 @@ const MapBackground: React.FC<MapProps> = ({ targets, shelters }) => {
         </div>
       </div>
 
-      {targets.map((target) => (
-        <Marker key={`t-${target.id}`} position={[target.latitude, target.longitude]} icon={getTargetIcon(target.target_type)}>
-          <Popup>
-            <strong style={{ color: '#FF3B30' }}>{getTargetEmoji(target.target_type)} {target.title}</strong><br />
-            <span style={{ textTransform: 'capitalize' }}>{target.target_type}</span><br />
-            {target.description}<br />
-            <small>{new Date(target.created_at).toLocaleString()}</small>
-          </Popup>
-        </Marker>
+      {/* Render targets with status-based styling */}
+      {visibleTargets.map((target) => (
+        <React.Fragment key={`target-${target.id}`}>
+          {/* Show circle for confirmed/unconfirmed threats */}
+          {(target.status === 'confirmed' || target.status === 'unconfirmed') && (
+            <Circle
+              center={[target.latitude, target.longitude]}
+              radius={target.probability === 'high' ? 5000 : target.probability === 'medium' ? 3000 : 1500}
+              pathOptions={{
+                color: probabilityColors[target.probability || 'low'],
+                fillColor: probabilityColors[target.probability || 'low'],
+                fillOpacity: 0.2,
+                weight: 2,
+              }}
+            />
+          )}
+          <Marker 
+            position={[target.latitude, target.longitude]} 
+            icon={getTargetIcon(target.target_type)}
+          >
+            <Popup>
+              <div style={{ minWidth: '180px' }}>
+                <strong style={{ color: '#FF3B30' }}>
+                  {getTargetEmoji(target.target_type)} {target.title}
+                </strong>
+                <br />
+                <span 
+                  style={{ 
+                    background: statusColors[target.status], 
+                    color: 'white', 
+                    padding: '2px 6px', 
+                    borderRadius: '4px',
+                    fontSize: '11px',
+                    marginRight: '4px'
+                  }}
+                >
+                  {statusLabels[target.status]}
+                </span>
+                {target.probability && (
+                  <span 
+                    style={{ 
+                      background: probabilityColors[target.probability], 
+                      color: 'white', 
+                      padding: '2px 6px', 
+                      borderRadius: '4px',
+                      fontSize: '11px'
+                    }}
+                  >
+                    {target.probability.toUpperCase()}
+                  </span>
+                )}
+                <br /><br />
+                {target.description && <>{target.description}<br /></>}
+                {target.report_count && target.report_count > 1 && (
+                  <>📊 Reports: {target.report_count}<br /></>
+                )}
+                <small>{new Date(target.created_at).toLocaleString()}</small>
+              </div>
+            </Popup>
+          </Marker>
+        </React.Fragment>
       ))}
 
       {shelters.map((shelter) => (
