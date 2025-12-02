@@ -16,9 +16,12 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      localStorage.removeItem('access');
-      localStorage.removeItem('refresh');
-      window.location.href = '/login';
+      const isAuthEndpoint = error.config?.url?.includes('login') || error.config?.url?.includes('register');
+      if (!isAuthEndpoint) {
+        localStorage.removeItem('access');
+        localStorage.removeItem('refresh');
+        window.location.href = '/login';
+      }
     }
     return Promise.reject(error);
   }
