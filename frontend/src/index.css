@@ -240,8 +240,8 @@ a:hover {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: rgba(255, 59, 48, 0.3);
-  border: 2px solid #FF3B30;
+  background: rgba(100, 100, 100, 0.3);
+  border: 2px solid #000000;
 }
 
 .map-report-btn-container {
